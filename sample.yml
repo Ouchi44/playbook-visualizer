@@ -1,0 +1,25 @@
+- playbook: initialize-a.yml
+
+- playbook: initialize-b.yml
+  dependencies: 
+    - initialize-a.yml
+
+- playbook: initialize-c.yml
+  dependencies: 
+    - initialize-b.yml
+
+- playbook: initialize-d.yml
+
+- name: original-name
+  playbook: hoge.yml
+  dependencies: 
+    - initialize-c.yml
+    - initialize-d.yml
+
+- playbook: foo.yml
+  dependencies:
+    - original-name
+
+- playbook: huga.yml
+  dependencies:
+    - foo.yml
